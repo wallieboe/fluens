@@ -21,7 +21,7 @@ function App() {
       </main>
 
       <footer className="p-4 text-xs text-gray-400">
-        &copy; {new Date().getFullYear()} Fluens. Alle rechten voorbehouden van Waltertje van nu.
+        &copy; {new Date().getFullYear()} Fluens. All rights reserved van Waltertje van nu.
       </footer>
     </div>
   );
