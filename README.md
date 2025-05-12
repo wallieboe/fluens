@@ -1,59 +1,34 @@
 # Fluens
 
-Fluens is een moderne webapplicatie gebouwd met React (frontend) en Firebase (backend).
-De applicatie wordt ontwikkeld met schaalbaarheid en veiligheid als uitgangspunt.
+**Fluens** is a modern web application built with React (frontend) and Firebase (backend). It is designed for scalable and secure integrations.
 
-## Projectstructuur
+**Project Overview:**
+- Frontend: React 19
+- Backend: Firebase (Firestore + Hosting)
+- CI/CD: GitHub Actions for automated deployments
+- Hosting: Firebase Hosting
 
-```
-fluens/
-  ├── frontend/    # React applicatie (client side)
-  ├── venv/        # Python virtual environment (voor backend/API uitbreidingen)
-  ├── README.md    # Project documentatie
-  └── .gitignore   # Git exclusions
-```
-
-## Installatie en opstarten
-
-### 1. Clone deze repository
+## Quick Start
 
 ```bash
-git clone https://github.com/<jouw-gebruiker>/fluens.git
-cd fluens
-```
+# Clone repository
+git clone https://github.com/wallieboe/fluens.git
 
-### 2. Zet de frontend omgeving op
-
-```bash
+# Install dependencies
 cd frontend
 npm install
+
+# Start local development server
 npm start
 ```
 
-De React-app draait nu lokaal op `http://localhost:3000`.
+## Branch Workflow
 
-### 3. (Optioneel) Activeer Python virtual environment
+- `develop` → daily development (features, fixes)
+- `test` → staging environment (merge from develop)
+- `main` → production releases only (merge from test)
 
-```bash
-source venv/bin/activate
-```
+## Deployment URLs
 
-Voor toekomstige backend-ontwikkeling (bijvoorbeeld API's met Flask of FastAPI).
-
----
-
-## Deployments
-
-* **Development**: lokaal via `npm start`.
-* **Testomgeving**: via Firebase Hosting Channel Deploy.
-* **Productieomgeving**: via Firebase Production Deploy.
-
----
-
-## Stack
-
-* React (met Create React App)
-* Firebase Authentication
-* Firebase Firestore
-* Firebase Hosting
-* Python (optioneel, voor API/backend)
+- Test environment: [https://fluens-7de49--test-s54lvqc7.web.app](https://fluens-7de49--test-s54lvqc7.web.app)
+- Production environment: (to be added)
