@@ -1,0 +1,49 @@
+
+---
+
+# 🛡️ `.gitignore` (voor Fluens)
+
+```gitignore
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# React build
+build/
+
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# VSCode settings
+.vscode/
+
+# dotenv
+.env
+.env.*
+*.env
+
+# Logs
+logs/
+*.log
+
+# Mac OS specific
+.DS_Store
+
+# Firebase
+.firebase/
+firebase-debug.log
+
+# Misc
+coverage/
+dist/
+tmp/
+*.swp
+*.swo
