@@ -1,0 +1,40 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main
+      - test
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Build React app
+      run: |
+        cd frontend
+        npm run build
+
+    - name: Deploy to Firebase Hosting (Test or Production)
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          firebase deploy --only hosting
+        elif [ "${{ github.ref }}" == "refs/heads/test" ]; then
+          firebase hosting:channel:deploy test
+        fi
