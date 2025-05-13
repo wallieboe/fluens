@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,15 +13,14 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // Reset vorige fouten
+    setError("");
+    setLoading(true); // Start loading
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("✅ Login successful for:", email);
       navigate("/dashboard");
     } catch (err) {
       console.error("❌ Login failed:", err.code, err.message);
-
-      // Schone foutmeldingen voor gebruiker
       switch (err.code) {
         case "auth/user-not-found":
           setError("Gebruiker niet gevonden. Controleer je e-mailadres.");
@@ -37,11 +37,20 @@ export default function Login() {
         default:
           setError("Inloggen mislukt. Probeer het opnieuw.");
       }
+    } finally {
+      setLoading(false); // Stop loading ongeacht succes of fout
     }
-  };
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    loading ? (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center">
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-green-500"></div>
+        </div>
+        <p className="mt-4 text-lg font-semibold text-gray-600">Bezig met inloggen...</p>
+      </div>
+    ) : (
       <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow-md w-80">
         <h2 className="text-2xl font-bold mb-4 text-center">Inloggen</h2>
         {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
@@ -68,6 +77,6 @@ export default function Login() {
           Login
         </button>
       </form>
-    </div>
-  );
+    )
+  );  
 }
