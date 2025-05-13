@@ -37,7 +37,7 @@ function App() {
           </main>
 
           <footer className="p-4 text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} Fluens. All rights reserved van Waltertje van nu.
+            &copy; {new Date().getFullYear()} Fluens. All rights reserved van Annona Deep Tier Impact Finance bv
             <br />
             Versie: {appVersion}
           </footer>
