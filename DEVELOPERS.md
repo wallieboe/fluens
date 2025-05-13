@@ -1,7 +1,7 @@
 # 👨‍💻 Fluens Developer Guide
 
 Welkom bij Fluens!  
-Deze handleiding legt uit hoe je het Fluens project lokaal opzet, welke workflows we volgen, hoe je correct bijdraagt, en hoe we samenwerken via GitHub Projects.
+Deze handleiding legt uit hoe je het project lokaal opzet, welke workflows we volgen, hoe je correct bijdraagt, en hoe we samenwerken via GitHub Projects.
 
 ---
 
@@ -11,8 +11,7 @@ Deze handleiding legt uit hoe je het Fluens project lokaal opzet, welke workflow
 - NPM v9+
 - Firebase CLI
 - Git
-- Een GitHub account
-- Toegang tot de Fluens repository
+- GitHub account met toegang tot Fluens repository
 
 ---
 
@@ -25,7 +24,7 @@ git clone https://github.com/wallieboe/fluens.git
 # Ga naar de frontend directory
 cd frontend
 
-# Installeer alle afhankelijkheden
+# Installeer afhankelijkheden
 npm install
 
 # Start de lokale ontwikkelserver
@@ -36,9 +35,9 @@ De app is bereikbaar op: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🌳 3. Branch Workflow
+## 🌳 3. Git Branch Workflow
 
-We gebruiken een standaard Git branching flow:
+We gebruiken een gestandaardiseerde branching flow:
 
 | Branch | Functie |
 |:--|:--|
@@ -49,95 +48,120 @@ We gebruiken een standaard Git branching flow:
 ### Nieuwe feature ontwikkelen:
 
 ```bash
-# Maak een nieuwe feature branch vanaf develop
+# Start altijd vanaf de develop branch
 git checkout develop
 git pull origin develop
-git checkout -b feature/jouw-feature-naam
 
-# Ontwikkel je feature
-# Commit regelmatig:
-git add .
-git commit -m "feat: korte uitleg over feature"
-
-# Push naar je eigen feature branch
-git push origin feature/jouw-feature-naam
+# Maak een nieuwe feature branch gebaseerd op het Issue
+git checkout -b feature/korte-beschrijving-van-feature
 ```
+
+**Branch naam regels:**
+- Gebruik `feature/` prefix voor nieuwe functionaliteit.
+- Kleine letters en koppeltekens (`-`) tussen woorden.
+- Hou de naam kort maar duidelijk (bijv. `feature/404-page-not-found`).
 
 ---
 
 ## 🔁 4. Pull Requests (PR's)
 
-- PR's worden **altijd gedaan naar de `develop` branch**.
-- Voeg duidelijke beschrijving toe bij je PR.
-- Link de PR aan de juiste GitHub Project Card (zie onder).
-- Laat minimaal 1 andere developer reviewen voor merging.
+- PR’s worden **altijd** gemaakt van jouw feature branch **naar** `develop`.
+- Titel PR = Korte, duidelijke beschrijving.
+- Beschrijving PR = Wat je hebt toegevoegd of opgelost.
+- Link het PR aan het juiste GitHub Issue en Project Board Card.
+- Kleine, overzichtelijke PR’s (focus op één feature of fix per PR).
 
 ---
 
 ## 📚 5. GitHub Projects (Development Board)
 
-We gebruiken een GitHub Project Board om alle ontwikkeling te organiseren:  
-**👉 Fluens Development Board**
+We gebruiken een GitHub Project Board om alle taken te beheren:  
+👉 **Fluens Development Board**
 
-### Kolommen structuur:
-- **Backlog:** Toekomstige ideeën / wensen
+### Board structuur:
+
+- **Backlog:** Toekomstige ideeën en wensen
 - **To Do (Sprint):** Taken voor deze sprint
 - **In Progress:** Waar je actief aan werkt
-- **Review / Test:** Tasks die wachten op review/test
-- **Done:** Voltooide taken
+- **Review / Test:** Taken die wachten op review/test
+- **Done:** Afgeronde taken
 
-### Regels voor werken met Project Board:
+### Regels:
 
-✅ Elke feature/bug moet een GitHub Issue hebben.  
-✅ Elke Issue wordt gekoppeld aan een **Project Card**.  
-✅ Als je aan iets werkt:
-- Sleep de kaart naar **In Progress**.
-- Bij PR: Link je PR aan de juiste kaart.
+✅ Elke taak heeft een GitHub Issue.  
+✅ Elke Issue is gekoppeld aan een Project Card.  
+✅ Tijdens werken:
+- Sleep het kaartje naar **In Progress**.
+- Koppel je PR aan de juiste kaart.
+✅ Na merge:
+- Sleep het kaartje naar **Done**.
 
-✅ Bij afronden:
-- Na merge naar develop, sleep je de kaart naar **Done**.
+---
+
+## 📦 Standaard GitHub Workflow voor Nieuwe Taken
+
+1. Start vanuit een bestaand **Issue** op het Project Board.
+2. Maak een **feature branch** vanaf `develop`:
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout -b feature/korte-beschrijving
+   ```
+3. Ontwikkel en test lokaal.
+4. Commit en push je werk:
+   ```bash
+   git add .
+   git commit -m "feat: korte beschrijving"
+   git push origin feature/korte-beschrijving
+   ```
+5. Maak een Pull Request (PR) naar `develop`.
+6. Vul duidelijke titel en omschrijving in.
+7. Link de PR aan het juiste Issue en Project Card.
+8. Na goedkeuring: Merge de PR.
+9. Sleep het Issue naar **Done**.
 
 ---
 
 ## 🧹 6. Code standaarden
 
-- Commit messages:
-  - `feat: ...` voor nieuwe features
-  - `fix: ...` voor bug fixes
-  - `docs: ...` voor documentatie aanpassingen
-- Schrijf duidelijke, leesbare componenten.
-- Houd componenten klein en single-responsibility.
+- **Commit messages** structuur:
+  - `feat: ...` → Nieuwe feature
+  - `fix: ...` → Bug fix
+  - `docs: ...` → Documentatie updates
+- **Componenten structuur:**
+  - Houd componenten klein en leesbaar.
+  - Volg Single Responsibility Principle.
 
 ---
 
-## 🚀 7. Deployment Proces
+## 🚀 7. Deployment Process
 
-| Stap | Waar? | Wat? |
+| Stap | Waar? | Proces |
 |:--|:--|:--|
-| Merge naar `test` | Testomgeving | Automatische Firebase deploy |
-| Merge naar `main` (later) | Productieomgeving | Volledige productie release |
+| Merge naar `test` | Firebase Testomgeving | Automatische deploy via GitHub Actions |
+| Merge naar `main` (later) | Productieomgeving | Definitieve release |
 
 ---
 
 ## 📚 8. Documentatie
 
-- Algemene projectinformatie → `README.md`
-- Versiegeschiedenis → `CHANGELOG.md`
-- Toekomstplanning → `ROADMAP.md`
-- Developer onboarding guide → `DEVELOPERS.md`
+- **Project overview:** `README.md`
+- **Veranderingen per versie:** `CHANGELOG.md`
+- **Roadmap en plannen:** `ROADMAP.md`
+- **Developer workflow:** `DEVELOPERS.md`
 
 ---
 
 ## 📢 9. Belangrijke Afspraken
 
 - Geen directe commits naar `test` of `main`.
-- Altijd werken via feature branches en PR’s.
-- Kleine, duidelijke PR’s (maximaal één feature per PR).
-- Test altijd lokaal voor je een PR maakt.
-- Koppel elke taak/feature aan een kaart in de Project Board.
+- Altijd werken via feature branches en Pull Requests.
+- PR's blijven klein en overzichtelijk.
+- Test altijd je werk lokaal vóór je een PR maakt.
+- Elke taak moet een gekoppeld Issue + Project Board kaart hebben.
 
 ---
 
 # 👋 Vragen?
 
-Bij vragen of problemen: neem contact op met het Fluens Development Team.
+Voor hulp of vragen, neem contact op met het Fluens Development Team.
