@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
+import { appVersion } from "./version";
+
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
 
           <footer className="p-4 text-xs text-gray-400">
             &copy; {new Date().getFullYear()} Fluens. All rights reserved van Waltertje van nu.
+            <br />
+            Versie: {appVersion}
           </footer>
         </div>
       </AuthProvider>
