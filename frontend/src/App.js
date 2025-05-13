@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import { appVersion } from "./version";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
                   </PrivateRoute>
                 } 
               />
+              <Route path="*" element={<NotFound />} />
+
             </Routes>
           </main>
 
