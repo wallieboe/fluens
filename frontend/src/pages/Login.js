@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 
 export default function Login() {
@@ -7,12 +8,14 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate(); // <-- HIER toevoegen
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("Login successful!");
-      // (Later redirect naar dashboard)
+      navigate("/dashboard"); // <-- EN HIER toevoegen
     } catch (err) {
       setError(err.message);
     }

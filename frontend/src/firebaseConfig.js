@@ -1,19 +1,16 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"; // <<== Dit importeren we extra voor authenticatie
+import { getAuth } from "firebase/auth"; // Vergeet niet Authentication support te importeren!
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDSHxmCDLAYNE_vT9qpDbWZFrID05WaP-E",
-  authDomain: "fluens-7de49.firebaseapp.com",
-  projectId: "fluens-7de49",
-  storageBucket: "fluens-7de49.appspot.com",
-  messagingSenderId: "994455961449",
-  appId: "1:994455961449:web:c97439115df202d07c07f8"
+  apiKey: "AIzaSyDv42-YYCylI671xH629OkrgD2MvWYzyyc",
+  authDomain: "fluens-dev.firebaseapp.com",
+  projectId: "fluens-dev",
+  storageBucket: "fluens-dev.appspot.com", // <-- Correctie hier!
+  messagingSenderId: "579696122495",
+  appId: "1:579696122495:web:d5c3708ec06f1ede033d4a"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firebase Authentication
 const auth = getAuth(app);
 
 export { auth };
