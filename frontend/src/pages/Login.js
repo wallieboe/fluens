@@ -8,16 +8,35 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // <-- HIER toevoegen
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(""); // Reset vorige fouten
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("Login successful!");
-      navigate("/dashboard"); // <-- EN HIER toevoegen
+      console.log("✅ Login successful for:", email);
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.message);
+      console.error("❌ Login failed:", err.code, err.message);
+
+      // Schone foutmeldingen voor gebruiker
+      switch (err.code) {
+        case "auth/user-not-found":
+          setError("Gebruiker niet gevonden. Controleer je e-mailadres.");
+          break;
+        case "auth/wrong-password":
+          setError("Onjuist wachtwoord. Probeer opnieuw.");
+          break;
+        case "auth/invalid-email":
+          setError("Ongeldig e-mailadres formaat.");
+          break;
+        case "auth/too-many-requests":
+          setError("Te veel mislukte pogingen. Probeer later opnieuw.");
+          break;
+        default:
+          setError("Inloggen mislukt. Probeer het opnieuw.");
+      }
     }
   };
 
@@ -25,7 +44,7 @@ export default function Login() {
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow-md w-80">
         <h2 className="text-2xl font-bold mb-4 text-center">Inloggen</h2>
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
         <input
           type="email"
           placeholder="Email"
