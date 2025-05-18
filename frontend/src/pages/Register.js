@@ -1,62 +1,67 @@
 import { useState } from "react";
 import FluensLogo from "../components/FluensLogo";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 
-export default function Login() {
+export default function Register() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true); // Start loading
+    setLoading(true);
+
+    if (password !== confirmPassword) {
+      setError("Wachtwoorden komen niet overeen");
+      setLoading(false);
+      return;
+    }
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      console.log("✅ Login successful for:", email);
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("✅ Registratie succesvol voor:", email);
       navigate("/dashboard");
     } catch (err) {
-      console.error("❌ Login failed:", err.code, err.message);
+      console.error("❌ Registratie mislukt:", err.code, err.message);
       switch (err.code) {
-        case "auth/user-not-found":
-          setError("Gebruiker niet gevonden. Controleer je e-mailadres.");
-          break;
-        case "auth/wrong-password":
-          setError("Onjuist wachtwoord. Probeer opnieuw.");
+        case "auth/email-already-in-use":
+          setError("Dit e-mailadres is al in gebruik");
           break;
         case "auth/invalid-email":
-          setError("Ongeldig e-mailadres formaat.");
+          setError("Ongeldig e-mailadres formaat");
           break;
-        case "auth/too-many-requests":
-          setError("Te veel mislukte pogingen. Probeer later opnieuw.");
+        case "auth/weak-password":
+          setError("Het wachtwoord moet minimaal 6 tekens bevatten");
           break;
         default:
-          setError("Inloggen mislukt. Probeer het opnieuw.");
+          setError("Registratie mislukt. Probeer het opnieuw.");
       }
     } finally {
-      setLoading(false); // Stop loading ongeacht succes of fout
+      setLoading(false);
     }
   }
 
   return (
     loading ? (
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[#3576C9]">
         <div className="flex items-center justify-center">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-green-500"></div>
         </div>
-        <p className="mt-4 text-lg font-semibold text-gray-600">Bezig met inloggen...</p>
+        <p className="mt-4 text-lg font-semibold text-gray-600">Bezig met registreren...</p>
       </div>
     ) : (
-      <form onSubmit={handleLogin} className="bg-white p-8 rounded-2xl shadow-xl w-96 flex flex-col items-center animate-fadein">
+      <form onSubmit={handleRegister} className="bg-white p-8 rounded-2xl shadow-xl w-96 flex flex-col items-center animate-fadein">
         <FluensLogo size={64} />
         <h2 className="text-3xl font-extrabold mb-2 text-center text-[#3576C9] tracking-tight">fluens</h2>
         <p className="text-base text-gray-500 mb-6 text-center">Automate Financial Workflows</p>
-        <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Inloggen</h2>
+        <h2 className="text-xl font-bold mb-4 text-center text-gray-800">Registreren</h2>
         {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
         <input
           type="email"
@@ -74,20 +79,28 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <input
+          type="password"
+          placeholder="Wachtwoord bevestigen"
+          className="border p-2 w-full mb-4"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
         <button
           type="submit"
           className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full mb-4"
         >
-          Login
+          Registreer
         </button>
         <button
           type="button"
-          onClick={() => navigate("/register")}
+          onClick={() => navigate("/login")}
           className="text-green-500 hover:text-green-600 font-semibold"
         >
-          Nog geen account? Registreer hier
+          Terug naar inloggen
         </button>
       </form>
     )
-  );  
+  );
 }
