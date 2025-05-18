@@ -9,6 +9,39 @@ It is designed for scalable, secure, and modular integrations between different 
 
 ---
 
+## 📦 Project Template Features
+
+This repository serves as a template for new React + Firebase projects. It includes:
+
+- Modern React setup with TypeScript support
+- Tailwind CSS with custom configuration
+- Custom color scheme (fluens-blue: #3576C9, fluens-dark-blue: #0f2d5a)
+- Custom animations and transitions
+- Firebase Authentication (Email/Password)
+- React Router for navigation
+- Responsive design components
+- Accessible components and forms
+- Custom error handling and loading states
+- Pre-configured build and development scripts
+
+### Key Components
+
+- **Authentication**: Login and Registration pages
+- **UI**: Modern design system with consistent styling
+- **Navigation**: Responsive navigation and routing
+- **Forms**: Validated forms with error handling
+- **Layout**: Flexible layout components
+- **Styling**: Custom Tailwind configuration
+
+### Color Scheme
+
+The template uses a custom color scheme:
+- Primary: fluens-blue (#3576C9)
+- Secondary: fluens-dark-blue (#0f2d5a)
+- These colors are defined in tailwind.config.js and can be customized as needed
+
+---
+
 ## 🚀 Project Overview
 
 - **Frontend:** React 19 + Tailwind CSS

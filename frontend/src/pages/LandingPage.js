@@ -36,7 +36,7 @@ export default function LandingPage() {
             <a href="#contact" className="hover:text-blue-200 transition">Contact</a>
           </div>
           <div className="flex items-center space-x-4">
-            <Link to="/" className="px-4 py-2 font-medium hover:text-blue-200 transition">Inloggen</Link>
+            <Link to="/login" className="px-4 py-2 font-medium hover:text-blue-200 transition">Inloggen</Link>
             <Link 
               to="/register" 
               className="bg-white text-[#3576C9] px-6 py-2 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
