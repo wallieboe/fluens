@@ -4,10 +4,12 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { useAuth } from '../context/AuthContext';
 import FluensLogo from './FluensLogo';
+import { useTheme } from '../context/ThemeContext';
 
 const Navigation = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -47,7 +49,7 @@ const Navigation = () => {
   const username = currentUser?.email ? currentUser.email.split('@')[0] : 'Gebruiker';
 
   return (
-    <nav className="bg-[#3576C9] text-white shadow-md">
+    <nav className="bg-fluens-blue dark:bg-fluens-dark-blue text-white shadow-md transition-colors">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -57,7 +59,13 @@ const Navigation = () => {
             <span className="ml-3 text-xl font-bold text-white">fluens</span>
           </div>
           
-          <div className="flex items-center" ref={dropdownRef}>
+          <div className="flex items-center space-x-2" ref={dropdownRef}>
+            <button
+              onClick={toggleTheme}
+              className="text-white hover:bg-blue-600 px-3 py-2 rounded-md transition-colors"
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
             <div className="relative">
               <button
                 onClick={toggleDropdown}
@@ -77,18 +85,18 @@ const Navigation = () => {
               </button>
               
               {isOpen && (
-                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                   <div className="py-1" role="menu" aria-orientation="vertical">
                     <button
                       onClick={handleAccount}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700"
                       role="menuitem"
                     >
                       Mijn Account
                     </button>
                     <button
                       onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700"
                       role="menuitem"
                     >
                       Uitloggen
