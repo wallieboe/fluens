@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import FluensLogo from "../components/FluensLogo";
+import { useTheme } from "../context/ThemeContext";
 
 const features = [
   {
@@ -21,6 +22,7 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const { theme, toggleTheme } = useTheme();
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#3576C9] to-blue-600 dark:from-fluens-dark-blue dark:to-blue-900 text-white transition-colors">
       {/* Navigation */}
@@ -36,9 +38,15 @@ export default function LandingPage() {
             <a href="#contact" className="hover:text-blue-200 transition">Contact</a>
           </div>
           <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleTheme}
+              className="text-white hover:bg-blue-600 px-3 py-2 rounded-md transition-colors"
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
             <Link to="/login" className="px-4 py-2 font-medium hover:text-blue-200 transition">Inloggen</Link>
-            <Link 
-              to="/register" 
+            <Link
+              to="/register"
               className="bg-white text-[#3576C9] px-6 py-2 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
             >
               Start Nu
