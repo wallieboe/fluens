@@ -6,7 +6,7 @@ export default function PrivateRoute({ children }) {
 
   if (!currentUser) {
     // Als niet ingelogd, redirect naar login
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   // Anders laat je de gevraagde pagina zien
