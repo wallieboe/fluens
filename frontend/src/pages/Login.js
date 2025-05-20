@@ -45,14 +45,14 @@ export default function Login() {
 
   return (
     loading ? (
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
         <div className="flex items-center justify-center">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-green-500"></div>
         </div>
         <p className="mt-4 text-lg font-semibold text-gray-600">Bezig met inloggen...</p>
       </div>
     ) : (
-      <form onSubmit={handleLogin} className="bg-white p-8 rounded-2xl shadow-xl w-96 flex flex-col items-center animate-fadein">
+      <form onSubmit={handleLogin} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl w-96 flex flex-col items-center animate-fadein transition-colors">
         <FluensLogo size={64} />
         <h2 className="text-3xl font-extrabold mb-2 text-center text-[#3576C9] tracking-tight">fluens</h2>
         <p className="text-base text-gray-500 mb-6 text-center">Automate Financial Workflows</p>
@@ -61,7 +61,7 @@ export default function Login() {
         <input
           type="email"
           placeholder="Email"
-          className="border p-2 w-full mb-4"
+          className="border p-2 w-full mb-4 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -69,7 +69,7 @@ export default function Login() {
         <input
           type="password"
           placeholder="Wachtwoord"
-          className="border p-2 w-full mb-4"
+          className="border p-2 w-full mb-4 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required

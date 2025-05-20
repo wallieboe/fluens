@@ -20,11 +20,11 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors">
       <Navigation />
       
       <main className="flex-grow w-full py-8 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-6 rounded-lg shadow-sm">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm transition-colors">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Welkom terug!</h2>
           <p className="text-gray-600 mb-6">Je bent nu ingelogd op het Fluens platform als <strong>{currentUser?.email}</strong>.</p>
           <button
@@ -36,7 +36,7 @@ export default function Dashboard() {
         </div>
       </main>
 
-      <footer className="bg-white shadow mt-12 w-full">
+      <footer className="bg-white dark:bg-gray-800 shadow mt-12 w-full transition-colors">
         <div className="w-full px-4 py-4">
           <p className="text-center text-gray-500 text-sm">
             &copy; {new Date().getFullYear()} Fluens. Alle rechten voorbehouden.
