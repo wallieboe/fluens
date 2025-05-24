@@ -10,10 +10,10 @@ import { appVersion } from "./version";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "./context/ThemeContext";
 
-
 function App() {
   return (
     <Router>
+      <AuthProvider>
       <ThemeProvider>
         <AuthProvider>
           <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-50 to-green-100 dark:from-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-100 transition-colors">

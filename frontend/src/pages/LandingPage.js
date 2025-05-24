@@ -40,6 +40,8 @@ export default function LandingPage() {
           <div className="flex items-center space-x-4">
             <button
               onClick={toggleTheme}
+              className="text-white hover:text-blue-200 transition"
+              aria-label="Toggle dark mode"
               className="text-white hover:bg-blue-600 px-3 py-2 rounded-md transition-colors"
             >
               {theme === 'dark' ? '☀️' : '🌙'}
