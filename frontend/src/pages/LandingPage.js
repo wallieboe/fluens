@@ -42,12 +42,13 @@ export default function LandingPage() {
               onClick={toggleTheme}
               className="text-white hover:text-blue-200 transition"
               aria-label="Toggle dark mode"
+              className="text-white hover:bg-blue-600 px-3 py-2 rounded-md transition-colors"
             >
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>
             <Link to="/login" className="px-4 py-2 font-medium hover:text-blue-200 transition">Inloggen</Link>
-            <Link 
-              to="/register" 
+            <Link
+              to="/register"
               className="bg-white text-[#3576C9] px-6 py-2 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
             >
               Start Nu
